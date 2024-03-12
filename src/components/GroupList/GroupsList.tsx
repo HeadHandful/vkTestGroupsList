@@ -1,4 +1,6 @@
+import {Title} from '@vkontakte/vkui';
 import {Group} from '../../types/groups';
+import {GroupCard} from './parts/GroupCard';
 
 interface Props {
   groups: Array<Group>;
@@ -7,29 +9,12 @@ interface Props {
 export const GroupsList = ({groups}: Props) => {
   return (
     <>
-      <h2>Список</h2>
-      <ul>
-        {groups.map((item) => (
-          <li key={item.id}>
-            <div>Название: {item.name}</div>
-            <div>Закрыт: {item.closed ? 'Да' : 'Нет'}</div>
-            <div>Цвет аватара: {item.avatar_color}</div>
-            <div>Количество участников: {item.members_count}</div>
-            {item.friends && (
-              <div>
-                Друзья:
-                <ul>
-                  {item.friends.map((friend, index) => (
-                    <li key={index}>
-                      {friend.first_name} {friend.last_name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </li>
+      <Title level="1">Список групп</Title>
+      <div>
+        {groups.map((group) => (
+          <GroupCard group={group} key={group.id} />
         ))}
-      </ul>
+      </div>
     </>
   );
 };
